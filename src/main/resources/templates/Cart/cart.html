@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title th:text="${title} ?: 'Your Cart'">Giỏ Hàng</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .empty-cart-alert {
+            margin-top: 20px;
+        }
+        .cart-actions {
+            margin-top: 20px;
+        }
+        .checkout-btn,
+        .continue-shopping-btn {
+            margin-bottom: 10px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="content" class="container mt-5">
+    <h1 class="mb-4">Giỏ Hàng Của Bạn</h1>
+    <div th:if="${cartItems.isEmpty()}" class="alert alert-info empty-cart-alert">Giỏ hàng trống, hãy thêm vào nhé!</div>
+    <div th:if="${cartItems.isEmpty()}"><a th:href="@{/products}" class="btn btn-secondary">Quay Lại</a></div>
+
+    <div th:unless="${cartItems.isEmpty()}">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-light">
+                <tr>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Số Lượng</th>
+                    <th>Giá</th>
+                    <th>Chỉnh Sửa</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item : ${cartItems}">
+                    <td th:text="${item.product.name}"></td>
+                    <td th:text="${item.quantity}"></td>
+                    <td th:text="${#numbers.formatDecimal(item.product.price, 0, 'COMMA', 0, 'POINT')} + 'đ'"></td>
+                    <td>
+                        <a th:href="@{/cart/remove/{productId}(productId=${item.product.id})}" class="btn btn-danger btn-sm">Xoá</a>
+                    </td>
+                    <tr>
+                    <td colspan="2" class="text-end"><strong>Tổng Giá:</strong></td>
+                    <td colspan="2" th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 0, 'POINT')} + 'đ'"><strong></strong></td>
+                    </tr>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="cart-actions d-flex justify-content-between align-items-center">
+            <a th:href="@{/cart/clear}" class="btn btn-secondary">Dọn Sạch Giỏ Hàng</a>
+            <div>
+                <a th:href="@{/order/checkout}" class="btn btn-primary checkout-btn">Đặt Hàng</a>
+                <a th:href="@{/products}" class="btn btn-primary continue-shopping-btn">Tiếp Tục Mua Sắm</a>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
