@@ -16,5 +16,18 @@ Website cung cấp trải nghiệm mua sắm dễ dàng và thuận tiện, phù
 
 ## Sử dụng
 Chạy lệnh sau để bắt đầu:
+1. **Clone repository** này về máy của bạn:
+   ```bash
+   git clone <link_repository>
+   Thay <link_repository> bằng URL của repository của bạn (ví dụ: https://github.com/username/repo.git).
+   cd <tên_thư_mục>
+   Thay <tên_thư_mục> bằng tên thư mục nơi bạn đã clone repository (ví dụ: ShoeStore).
+   Cài đặt các thư viện cần thiết bằng lệnh:
+   dotnet restore
+
+### Lưu ý:
+- Hãy thay thế `<link_repository>` và `<tên_thư_mục>` bằng thông tin cụ thể của bạn trước khi lưu file README.md.
+
+
 ## Thông tin liên hệ
 Email: adidos@gmail.com
